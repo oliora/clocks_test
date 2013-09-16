@@ -8,11 +8,11 @@ if(MSVC)
     add_definitions(-D_SCL_SECURE_NO_WARNINGS)
     
     add_definitions(-DBOOST_ALL_NO_LIB) # Turn off Boost's auto-linking
-    set(Boost_USE_STATIC_LIBS ON)
+    set(Boost_USE_STATIC_LIBS ON) # Use static libs
 endif()
 
 if ("${CMAKE_CXX_COMPILER_ID}" STREQUAL "Clang")
-  set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
+    set(CMAKE_CXX_FLAGS "-std=c++11 -stdlib=libc++")
 endif()
 
 # Find Boost
