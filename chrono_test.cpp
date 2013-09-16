@@ -41,10 +41,10 @@ int main(int argc, char *argv[])
 
     std::cout
         << std::setw(10) << "" << std::right
-            << std::setw(20) << "std system time"
-            << std::setw(20) << "std steady time"
-            << std::setw(20) << "boost system time"
-            << std::setw(20) << "boost steady time"
+            << std::setw(20) << "std system_clock"
+            << std::setw(20) << "std steady_clock"
+            << std::setw(20) << "boost system_clock"
+            << std::setw(20) << "boost steady_clock"
             << std::endl
         << std::setw(10) << std::left << "t0, ticks" << std::right
             << std::setw(20) << std_system_time_0
