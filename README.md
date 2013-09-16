@@ -1,4 +1,4 @@
-# clocks_test
+# Clocks Test
 
 Tests for behavior of &lt;chrono>'s system/steady clocks and related stuff like sleeps and waits.
 
