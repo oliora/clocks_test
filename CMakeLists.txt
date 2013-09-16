@@ -20,8 +20,8 @@ find_package(Boost 1.54 REQUIRED COMPONENTS chrono thread system)
 
 include_directories(${Boost_INCLUDE_DIRS})
 
-add_executable(chrono_test "chrono_test.cpp")
-target_link_libraries(chrono_test ${Boost_LIBRARIES})
+add_executable(clocks_test "clocks_test.cpp")
+target_link_libraries(clocks_test ${Boost_LIBRARIES})
 
 add_executable(sleep_test "sleep_test.cpp")
 target_link_libraries(sleep_test ${Boost_LIBRARIES})
