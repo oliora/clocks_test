@@ -8,6 +8,7 @@
 #include <boost/thread.hpp>
 #include <vector>
 
+using namespace chrono_test;
 
 namespace
 {
@@ -66,13 +67,22 @@ namespace
             throw std::logic_error("wrong future status");
         }
     }
+
+    template<typename D1, typename D2, typename Status>
+    void print_result(const char *group, const char *name, const D1& duration1, const D2& duration2, Status status)
+    {
+        synced_cout()
+            << std::left << std::setw(15) << group << std::right
+            << std::setw(20) << name <<  "  timings, s: "
+            << std::setw(10) << seconds(duration1) << " (std)"
+            << std::setw(10) << seconds(duration2) << " (boost)"
+            << std::setw(12) << to_str(status) << "\n";
+    }
 }    
 
 
 int main(int argc, char *argv[])
 {
-    using namespace chrono_test;
-    
     typedef void (*func)();
     
     enum { SLEEP = 15 }; // seconds
@@ -90,11 +100,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_for_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std cv", "wait_for", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -107,11 +114,8 @@ int main(int argc, char *argv[])
 
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_until_steady_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std cv", "wait_until_steady", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -124,11 +128,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_until_system_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std cv", "wait_until_system", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         
         // boost condition_variable
@@ -143,11 +144,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_for_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost cv", "wait_for", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -160,11 +158,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_until_steady_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost cv", "wait_until_steady", std_t1 - std_t0, boost_t1 - boost_t0, s); 
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -178,11 +173,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "wait_until_system_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost cv", "wait_until_system", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
 
         // std future
@@ -195,11 +187,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "fufute_wait_for_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std future", "wait_for", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -210,11 +199,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "fufute_wait_until_steady_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std future", "wait_until_steady", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -225,11 +211,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "future_wait_until_system_std" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("std future", "wait_until_system", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
 
         // boost future
@@ -243,11 +226,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "fufute_wait_for_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost future", "wait_for", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -259,11 +239,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "fufute_wait_until_steady_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost future", "wait_until_steady", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
@@ -275,11 +252,8 @@ int main(int argc, char *argv[])
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
-            
-            synced_cout() << std::setw(30) << "future_wait_until_system_bst" << " finished. Timings, s: "
-                << std::setw(10) << seconds(std_t1 - std_t0) << " (std)"
-                << std::setw(10) << seconds(boost_t1 - boost_t0) << " (boost)"
-                << std::setw(12) << to_str(s) << "\n";
+
+            print_result("boost future", "wait_until_system", std_t1 - std_t0, boost_t1 - boost_t0, s);
         },
     };
 
