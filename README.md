@@ -1,6 +1,31 @@
 # Clocks Test
 
-Tests for behavior of &lt;chrono>'s system/steady clocks and related stuff like sleeps and waits.
+Tests for behavior of STL and Boost <chrono>'s system/steady clocks and related stuff like sleeps and waits.
+
+## Tests included
+
+### chrono_test
+
+Tests `chrono::system_clock` and `chrono::steady_clock` of STL and Boost.
+
+To test:
+* Execute `chrono_test`.
+* Change system time for several minutes back or forward.
+* Press Enter to finish `chrono_test` execution.
+
+Enjoy the results:
+
+                  std system_clock    std steady_clock  boost system_clock  boost steady_clock
+    t0, ticks    13790857389794140   13790857389794140   13790857389794140    2016885602890439
+    t1, ticks    13790856336881722   13790856336881722   13790856336881722    2016905101856938
+    t1 - t0, s            -105.291            -105.291            -105.291              19.499
+
+Where *t0* is the clock's value at program start and *t1* at the one's finish.
+
+
+### sleep_test executable
+
+### wait_test executable
 
 
 ## Prerequisities
