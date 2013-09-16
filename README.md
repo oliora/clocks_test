@@ -20,7 +20,7 @@ Enjoy the results:
     t1, ticks    13790856336881722   13790856336881722   13790856336881722    2016905101856938
     t1 - t0, s            -105.291            -105.291            -105.291              19.499
 
-Where *t0* is the clock's value at program start and *t1* at the one's finish.
+Where *t0* is the clock's value at program start and *t1* the same at the program's finish.
 
 
 ### sleep_test executable
@@ -37,7 +37,7 @@ Where *t0* is the clock's value at program start and *t1* at the one's finish.
 
 ##How To Build
 
-### *nix / OSX:
+### *nix / OS X:
 
     mkdir workspace
     cd workspace
