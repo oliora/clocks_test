@@ -27,7 +27,7 @@ typedef std::cv_status std_cv_status;
         case std::cv_status::timeout:
             return "timeout";
         case std::cv_status::no_timeout:
-            return "NO timeout";
+            return "no_timeout";
         default:
             throw std::logic_error("wrong cv status");
         }
@@ -40,7 +40,7 @@ typedef std::cv_status std_cv_status;
         case boost::cv_status::timeout:
             return "timeout";
         case boost::cv_status::no_timeout:
-            return "NO timeout";
+            return "no_timeout";
         default:
             throw std::logic_error("wrong cv status");
         }
