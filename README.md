@@ -31,8 +31,8 @@ Where *t0* is the clock's value at program start and *t1* the same at the progra
 ## Prerequisities
 
 * MS Visual Studio 2012 or any other compiler supporting C++11 ([clang](http://clang.llvm.org/) + [libc++](http://libcxx.llvm.org/) is the best choice, btw ;).
-* [CMake](http://www.cmake.org/) version 2.8.10 or newer. Most probably the earlier versions are also OK but you have to change version requirement in*CMakeLists.txt* file.
-* [Boost](http://www.boost.org) version 1.54 or above. Most probably the earlier versions are also OK. The following Boost libraries are needed: *system*, *chrono*, *thread*.
+* [CMake](http://www.cmake.org/) version 2.8.10 or newer. Most probably the earlier versions are also OK but you have to change version requirement in *CMakeLists.txt* file.
+* [Boost](http://www.boost.org) version 1.54 or above. Most probably the earlier versions are also OK, but you have to change version requirement in *CMakeLists.txt* file. The following Boost libraries are need to be compiled: *system*, *chrono*, *thread*.
 
 
 ##How To Build
