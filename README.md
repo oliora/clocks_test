@@ -44,7 +44,7 @@ Where *t0* is the clock's value at program start and *t1* the same at the progra
     cmake ..
     make
 
-### Windows:
+### Windows (Visual Studio 2012):
 
     mkdir workspace
     cd workspace
@@ -55,3 +55,5 @@ Then either build it by
     cmake --build . --config Release
 
 or open generated solution file.
+
+Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.html) to get more options and stronger control over build.
