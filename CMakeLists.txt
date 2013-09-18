@@ -1,6 +1,6 @@
 # (c) 2013 Andrey Upadyshev aka oliora <oliora@gmail.com>.
 # File released to public domain.
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.10)
 
 project(clocks_test)
 
