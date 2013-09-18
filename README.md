@@ -4,14 +4,14 @@ Tests for behavior of STL and Boost <chrono>'s system/steady clocks and related 
 
 ## Tests included
 
-### chrono_test
+### clocks_test
 
 Tests `chrono::system_clock` and `chrono::steady_clock` of STL and Boost.
 
 To test:
-* Run `chrono_test`.
+* Run `clocks_test`.
 * Change system time for several minutes back or forward when prompted.
-* Press Enter to finish `chrono_test` execution.
+* Press Enter to finish test execution.
 
 Enjoy the results:
 
