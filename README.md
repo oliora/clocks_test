@@ -22,14 +22,14 @@ Most probably the earlier versions of CMake and Boost are also OK. Note that bef
 
     mkdir workspace
     cd workspace
-    cmake <project_dir>
+    cmake <path_to_clocks_test>
     make
 
 ### Windows (Visual Studio 2012):
 
     mkdir workspace
     cd workspace
-    cmake <project_dir> -G "Visual Studio 11" -DBOOST_INCLUDEDIR=<path_to_boost_headers> -DBOOST_LIBRARYDIR=<path_to_boost_libs>
+    cmake <path_to_clocks_test> -G "Visual Studio 11" -DBOOST_INCLUDEDIR=<path_to_boost_headers> -DBOOST_LIBRARYDIR=<path_to_boost_libs>
 
 Then either build it by
 
