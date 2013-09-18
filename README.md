@@ -46,7 +46,36 @@ Output format:
 Where timings are taken from STL and Boost `steady_clock`.
 
 
-### wait_test executable
+### wait_test
+
+Tests the following methods of STL and Boost implementations of `condition_variable` and `future`:
+* `wait_for(duration)`
+* `wait_until(steady_clock::time_point)`
+* `wait_until(system_clock::time_point)`
+
+To test:
+* Prepare to be ready to change system clock in several seconds (open corresponding page of System Preferences or similar).
+* Run `./wait_test`.
+* Change system time for one minute back or forward.
+* Wait until test execution finished.
+
+Output format:
+
+    std future        wait_until_steady  timings, s:    15.0005 (std)   15.0005 (boost)     timeout
+    std cv                     wait_for  timings, s:    15.0005 (std)   15.0006 (boost)     timeout
+    boost cv                   wait_for  timings, s:    15.0006 (std)   15.0007 (boost)     timeout
+    std cv            wait_until_steady  timings, s:    15.0006 (std)   15.0007 (boost)     timeout
+    std future                 wait_for  timings, s:    15.0005 (std)   15.0006 (boost)     timeout
+    boost future               wait_for  timings, s:    15.0006 (std)   15.0006 (boost)     timeout
+    std cv            wait_until_system  timings, s:    15.0007 (std)   15.0009 (boost)  no_timeout
+    boost cv          wait_until_system  timings, s:    15.0007 (std)   15.0009 (boost)     timeout
+    boost future      wait_until_steady  timings, s:    15.0008 (std)   15.0008 (boost)     timeout
+    boost future      wait_until_system  timings, s:    15.0008 (std)   15.0008 (boost)     timeout
+    boost cv          wait_until_steady  timings, s:    15.0008 (std)   15.0009 (boost)     timeout
+    std future        wait_until_system  timings, s:    77.3298 (std)   77.3298 (boost)     timeout
+
+Where timings are taken from STL and Boost `steady_clock`.
+Last column is a result of wait. It's either `cv_status` or `future_status` type.
 
 
 ## Prerequisities
