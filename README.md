@@ -1,6 +1,7 @@
 # Clocks Test
 
-Tests for behavior of STL and Boost <chrono>'s system/steady clocks and related stuff like sleeps and waits.
+Set of tools which allow to test how STL and Boost performs on your platform in case of system time changed.
+Currently contains tests for `chrono::steady_clock`, `chrono::system_clock`, sleep methods of `this_thread` and wait methods of `condition_variable` and `future`.
 
 
 ## Prerequisities
@@ -38,7 +39,7 @@ Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.
 
 ### clocks_test
 
-Tests STL and Boost implementations of `chrono::system_clock` and `chrono::steady_clock`.
+Tests `chrono::system_clock` and `chrono::steady_clock`.
 
 To test:
 * Run `./clocks_test`.
@@ -58,7 +59,7 @@ Where *t0* is the clock's value at program start and *t1* the one at the program
 
 ### sleep_test
 
-Tests STL and Boost implementations of `this_thread` methods:
+Tests `this_thread` methods:
 * `sleep_for(duration)`
 * `sleep_until(steady_clock::time_point)`
 * `sleep_until(system_clock::time_point)`
@@ -83,7 +84,7 @@ Where timings are taken from STL and Boost `steady_clock`.
 
 ### wait_test
 
-Tests STL and Boost implementations of `condition_variable` and `future` methods:
+Tests `condition_variable` and `future` methods:
 * `wait_for(duration)`
 * `wait_until(steady_clock::time_point)`
 * `wait_until(system_clock::time_point)`
