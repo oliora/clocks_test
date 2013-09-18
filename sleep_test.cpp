@@ -14,7 +14,7 @@ namespace
     {
         synced_cout()
             << std::left << std::setw(10) << group << std::right
-            << std::setw(35) << name << "  timings, s: "
+            << std::setw(20) << name << "  timings, s: "
             << std::setw(10) << seconds(duration1) << " (std)"
             << std::setw(10) << seconds(duration2) << " (boost)\n";
     }
