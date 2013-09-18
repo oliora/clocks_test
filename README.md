@@ -9,7 +9,7 @@ Tests for behavior of STL and Boost <chrono>'s system/steady clocks and related 
 Tests STL and Boost implementations of `chrono::system_clock` and `chrono::steady_clock`.
 
 To test:
-* Run `clocks_test`.
+* Run `./clocks_test`.
 * Change system time for several minutes back or forward when prompted.
 * Press Enter to finish test execution.
 
@@ -30,7 +30,7 @@ Tests STL and Boost implementations of `this_thread::sleep_for`, `this_thread::s
 
 To test:
 * Prepare to be ready to change system clock in several seconds (open corresponding page of System Preferences or similar).
-* Run `sleep_test`.
+* Run `./sleep_test`.
 * Change system time for one minute back or forward.
 * Wait until test execution finished.
 
