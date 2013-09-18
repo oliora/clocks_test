@@ -6,9 +6,12 @@ Currently contains tests for `chrono::steady_clock`, `chrono::system_clock`, sle
 
 ## Prerequisities
 
-* MS Visual Studio 2012 or any other compiler supporting C++11 ([clang](http://clang.llvm.org/) + [libc++](http://libcxx.llvm.org/) is the best choice, btw ;).
-* [CMake](http://www.cmake.org/) version 2.8.10 or newer. Most probably the earlier versions are also OK but you have to change version requirement in *CMakeLists.txt* file.
-* [Boost](http://www.boost.org) version 1.54 or above. Most probably the earlier versions are also OK, but you have to change version requirement in *CMakeLists.txt* file. The following Boost libraries are need to be compiled: *system*, *chrono*, *thread*.
+* MS Visual Studio 2012 or any other compiler supporting C++11.
+  [Clang](http://clang.llvm.org/) in conjunction with [libc++](http://libcxx.llvm.org/) (both included in Xcode now) is the best choice btw ;)
+* [CMake](http://www.cmake.org/) version 2.8.10 or newer.
+* [Boost](http://www.boost.org) version 1.54 or above. The following Boost libraries are need to be compiled: *system*, *chrono*, *thread*.
+
+Most probably the earlier versions of CMake and Boost are also OK. Note that before using them you have to change version requirements in *CMakeLists.txt* file.
 
 
 ##How To Build
