@@ -36,12 +36,12 @@ To test:
 
 Output format:
 
-    std              sleep_until_steady  timings, s:    15.0011 (std)   15.0011 (boost)
-    std                       sleep_for  timings, s:    15.0011 (std)   15.0011 (boost)
-    boost            sleep_until_steady  timings, s:    15.0012 (std)   15.0012 (boost)
-    boost                     sleep_for  timings, s:    15.0012 (std)   15.0012 (boost)
-    std              sleep_until_system  timings, s:    77.1577 (std)   77.1577 (boost)
-    boost            sleep_until_system  timings, s:    77.1578 (std)   77.1578 (boost)
+    std         sleep_until_steady  timings, s:    15.0011 (std)   15.0011 (boost)
+    std                  sleep_for  timings, s:    15.0011 (std)   15.0011 (boost)
+    boost       sleep_until_steady  timings, s:    15.0012 (std)   15.0012 (boost)
+    boost                sleep_for  timings, s:    15.0012 (std)   15.0012 (boost)
+    std         sleep_until_system  timings, s:    77.1577 (std)   77.1577 (boost)
+    boost       sleep_until_system  timings, s:    77.1578 (std)   77.1578 (boost)
 
 Where timings are taken from STL and Boost `steady_clock`.
 
