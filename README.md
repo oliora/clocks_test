@@ -26,7 +26,10 @@ Where *t0* is the clock's value at program start and *t1* the one at the program
 
 ### sleep_test
 
-Tests STL and Boost implementations of `this_thread::sleep_for`, `this_thread::sleep_until` with `steady_clock` and `this_thread::sleep_until` with `system_clock`.
+Tests STL and Boost implementations of:
+* `this_thread::sleep_for(duration)`
+* `this_thread::sleep_until(steady_clock::time_point)`
+* `this_thread::sleep_until(system_clock::time_point)`
 
 To test:
 * Prepare to be ready to change system clock in several seconds (open corresponding page of System Preferences or similar).
