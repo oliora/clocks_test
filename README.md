@@ -21,7 +21,7 @@ Output format:
     boost        system_clock 1379539687034400000 1379539658598582000            -28.4358
     boost        steady_clock      11785328412464      11819486798474             34.1584
 
-Where *t0* is the clock's value at program start and *t1* the one at the program's finish.
+Where *t0* is the clock's value at program start and *t1* the one at the program finish.
 
 
 ### sleep_test
@@ -78,7 +78,7 @@ Output format:
     std future        wait_until_system  timings, s:    77.3298 (std)   77.3298 (boost)     timeout
 
 Where timings are taken from STL and Boost `steady_clock`.
-Last column is a result of wait. It's either `cv_status` or `future_status` type.
+Last column is a result of wait. It either `cv_status` or `future_status` type.
 
 
 ## Prerequisities
