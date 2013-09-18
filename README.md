@@ -15,12 +15,13 @@ To test:
 
 Enjoy the results:
 
-                  std system_clock    std steady_clock  boost system_clock  boost steady_clock
-    t0, ticks    13790857389794140   13790857389794140   13790857389794140    2016885602890439
-    t1, ticks    13790856336881722   13790856336881722   13790856336881722    2016905101856938
-    t1 - t0, s            -105.291            -105.291            -105.291              19.499
+                                        t0, ticks           t1, ticks          t1 - t0, s
+    std          system_clock    1379539687034393    1379539658598580            -28.4358
+    std          steady_clock      11785328391541      11819486797225             34.1584
+    boost        system_clock 1379539687034400000 1379539658598582000            -28.4358
+    boost        steady_clock      11785328412464      11819486798474             34.1584
 
-Where *t0* is the clock's value at program start and *t1* the same at the program's finish.
+Where *t0* is the clock's value at program start and *t1* the one at the program's finish.
 
 
 ### sleep_test executable
