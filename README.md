@@ -109,4 +109,4 @@ Then either build it by
 
 or open generated solution file.
 
-Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.html) to get more options and stronger control over build.
+Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.html) to get more options and take complete control over build.
