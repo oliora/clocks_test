@@ -3,6 +3,8 @@
 Set of tools which allow to test how STL and Boost performs on your platform in case of system time changed.
 Currently contains tests for `chrono::steady_clock`, `chrono::system_clock`, sleep methods of `this_thread` and wait methods of `condition_variable` and `future`.
 
+And yes, **this project is released to public domain.**
+
 
 ## Prerequisities
 
