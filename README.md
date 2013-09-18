@@ -46,7 +46,7 @@ Tests `chrono::system_clock` and `chrono::steady_clock`.
 
 To test:
 * Run `./clocks_test`.
-* Change system time for several minutes back or forward when prompted.
+* When prompted, change system time for one minute back or forward or back and forward or whatever you want to test.
 * Press Enter to finish test execution.
 
 Output format:
@@ -70,7 +70,7 @@ Tests `this_thread` methods:
 To test:
 * Prepare to be ready to change system clock in several seconds (open corresponding page of System Preferences or similar).
 * Run `./sleep_test`.
-* Change system time for one minute back or forward.
+* Change system time for one minute back or forward or back and forward or whatever you want to test. But do it quickly!
 * Wait until test execution finished.
 
 Output format:
@@ -95,7 +95,7 @@ Tests `condition_variable` and `future` methods:
 To test:
 * Prepare to be ready to change system clock in several seconds (open corresponding page of System Preferences or similar).
 * Run `./wait_test`.
-* Change system time for one minute back or forward.
+* Change system time for one minute back or forward or back and forward or whatever you want to test. But do it quickly!
 * Wait until test execution finished.
 
 Output format:
