@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
         },
     };
 
-    std::vector<boost::thread> threads;
+    std::vector<std::thread> threads;
 
     for (const auto& f: functions)
         threads.emplace_back(f);
