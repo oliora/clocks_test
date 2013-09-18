@@ -12,7 +12,15 @@ using namespace chrono_test;
 
 namespace
 {
-    std::string to_str(std::cv_status::cv_status status)
+#ifdef _MSC_VER
+typedef std::future_status::future_status std_future_status;
+typedef std_cv_status std_cv_status;
+#else
+typedef std::future_status std_future_status;
+typedef std::cv_status std_cv_status;
+#endif
+
+    std::string to_str(std_cv_status status)
     {
         switch (status)
         {
@@ -38,7 +46,7 @@ namespace
         }
     }
 
-    std::string to_str(std::future_status::future_status status)
+    std::string to_str(std_future_status status)
     {
         switch (status)
         {
@@ -96,7 +104,7 @@ int main(int argc, char *argv[])
             std::mutex std_m;
             std::condition_variable std_c;
             std::unique_lock<std::mutex> l(std_m);
-            std::cv_status::cv_status s = std_c.wait_for(l, std::chrono::seconds(SLEEP));
+            std_cv_status s = std_c.wait_for(l, std::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -110,7 +118,7 @@ int main(int argc, char *argv[])
             std::mutex std_m;
             std::condition_variable std_c;
             std::unique_lock<std::mutex> l(std_m);
-            std::cv_status::cv_status s = std_c.wait_until(l, std::chrono::steady_clock::now() + std::chrono::seconds(SLEEP));
+            std_cv_status s = std_c.wait_until(l, std::chrono::steady_clock::now() + std::chrono::seconds(SLEEP));
 
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -124,7 +132,7 @@ int main(int argc, char *argv[])
             std::mutex std_m;
             std::condition_variable std_c;
             std::unique_lock<std::mutex> l(std_m);
-            std::cv_status::cv_status s = std_c.wait_until(l, std::chrono::system_clock::now() + std::chrono::seconds(SLEEP));
+            std_cv_status s = std_c.wait_until(l, std::chrono::system_clock::now() + std::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -181,9 +189,16 @@ int main(int argc, char *argv[])
         [] {
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
-            
-            std::future<int> f = std::async(std::launch::async, [](){ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
-            std::future_status::future_status s = f.wait_for(std::chrono::seconds(SLEEP));
+
+            // bug in VS2012 that require to use async
+            // http://connect.microsoft.com/VisualStudio/feedback/details/761829 
+#if !defined _MSC_VER || _MSC_VER >= 1800
+            std::promise<void> pt;
+            std::future<void> f = pt.get_future();
+#else
+            std::future<void> f = std::async(std::launch::async, []{ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
+#endif
+            std_future_status s = f.wait_for(std::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -194,8 +209,13 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
             
-            std::future<int> f = std::async(std::launch::async, [](){ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
-            std::future_status::future_status s = f.wait_until(std::chrono::steady_clock::now() + std::chrono::seconds(SLEEP));
+#if !defined _MSC_VER || _MSC_VER >= 1800
+            std::promise<void> pt;
+            std::future<void> f = pt.get_future();
+#else
+            std::future<void> f = std::async(std::launch::async, []{ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
+#endif
+            std_future_status s = f.wait_until(std::chrono::steady_clock::now() + std::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -206,8 +226,13 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
             
-            std::future<int> f = std::async(std::launch::async, [](){ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
-            std::future_status::future_status s = f.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(SLEEP));
+#if !defined _MSC_VER || _MSC_VER >= 1800
+            std::promise<void> pt;
+            std::future<void> f = pt.get_future();
+#else
+            std::future<void> f = std::async(std::launch::async, []{ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
+#endif
+            std_future_status s = f.wait_until(std::chrono::system_clock::now() + std::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
             const auto std_t1 = std::chrono::steady_clock::now();
@@ -220,8 +245,8 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
             
-            boost::promise<int> pt;
-            boost::unique_future<int> f=pt.get_future();
+            boost::promise<void> pt;
+            boost::unique_future<void> f=pt.get_future();
             boost::future_status s = f.wait_for(boost::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
@@ -233,8 +258,8 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
             
-            boost::promise<int> pt;
-            boost::unique_future<int> f=pt.get_future();
+            boost::promise<void> pt;
+            boost::unique_future<void> f=pt.get_future();
             boost::future_status s = f.wait_until(boost::chrono::steady_clock::now() + boost::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
@@ -246,8 +271,8 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
             
-            boost::promise<int> pt;
-            boost::unique_future<int> f=pt.get_future();
+            boost::promise<void> pt;
+            boost::unique_future<void> f=pt.get_future();
             boost::future_status s = f.wait_until(boost::chrono::system_clock::now() + boost::chrono::seconds(SLEEP));
             
             const auto boost_t1 = boost::chrono::steady_clock::now();
