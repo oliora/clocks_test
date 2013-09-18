@@ -2,6 +2,38 @@
 
 Tests for behavior of STL and Boost <chrono>'s system/steady clocks and related stuff like sleeps and waits.
 
+
+## Prerequisities
+
+* MS Visual Studio 2012 or any other compiler supporting C++11 ([clang](http://clang.llvm.org/) + [libc++](http://libcxx.llvm.org/) is the best choice, btw ;).
+* [CMake](http://www.cmake.org/) version 2.8.10 or newer. Most probably the earlier versions are also OK but you have to change version requirement in *CMakeLists.txt* file.
+* [Boost](http://www.boost.org) version 1.54 or above. Most probably the earlier versions are also OK, but you have to change version requirement in *CMakeLists.txt* file. The following Boost libraries are need to be compiled: *system*, *chrono*, *thread*.
+
+
+##How To Build
+
+### *nix / OS X:
+
+    mkdir workspace
+    cd workspace
+    cmake ..
+    make
+
+### Windows (Visual Studio 2012):
+
+    mkdir workspace
+    cd workspace
+    cmake .. -G "Visual Studio 11" -DBOOST_INCLUDEDIR=<path_to_boost_headers> -DBOOST_LIBRARYDIR=<path_to_boost_libs>
+
+Then either build it by
+
+    cmake --build . --config Release
+
+or open generated solution file.
+
+Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.html) to get more options and take complete control over build.
+
+
 ## Tests included
 
 ### clocks_test
@@ -79,34 +111,3 @@ Output format:
 
 Where timings are taken from STL and Boost `steady_clock`.
 Last column is a result of wait. It either `cv_status` or `future_status` type.
-
-
-## Prerequisities
-
-* MS Visual Studio 2012 or any other compiler supporting C++11 ([clang](http://clang.llvm.org/) + [libc++](http://libcxx.llvm.org/) is the best choice, btw ;).
-* [CMake](http://www.cmake.org/) version 2.8.10 or newer. Most probably the earlier versions are also OK but you have to change version requirement in *CMakeLists.txt* file.
-* [Boost](http://www.boost.org) version 1.54 or above. Most probably the earlier versions are also OK, but you have to change version requirement in *CMakeLists.txt* file. The following Boost libraries are need to be compiled: *system*, *chrono*, *thread*.
-
-
-##How To Build
-
-### *nix / OS X:
-
-    mkdir workspace
-    cd workspace
-    cmake ..
-    make
-
-### Windows (Visual Studio 2012):
-
-    mkdir workspace
-    cd workspace
-    cmake .. -G "Visual Studio 11" -DBOOST_INCLUDEDIR=<path_to_boost_headers> -DBOOST_LIBRARYDIR=<path_to_boost_libs>
-
-Then either build it by
-
-    cmake --build . --config Release
-
-or open generated solution file.
-
-Please read [CMake documentation](http://www.cmake.org/cmake/help/documentation.html) to get more options and take complete control over build.
