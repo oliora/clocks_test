@@ -14,7 +14,7 @@ namespace
 {
 #ifdef _MSC_VER
 typedef std::future_status::future_status std_future_status;
-typedef std_cv_status std_cv_status;
+typedef std::cv_status::cv_status std_cv_status;
 #else
 typedef std::future_status std_future_status;
 typedef std::cv_status std_cv_status;
@@ -190,12 +190,12 @@ int main(int argc, char *argv[])
             const auto boost_t0 = boost::chrono::steady_clock::now();
             const auto std_t0 = std::chrono::steady_clock::now();
 
-            // bug in VS2012 that require to use async
-            // http://connect.microsoft.com/VisualStudio/feedback/details/761829 
 #if !defined _MSC_VER || _MSC_VER >= 1800
             std::promise<void> pt;
             std::future<void> f = pt.get_future();
 #else
+            // bug in VS2012 that require to start future related operation before call wait
+            // http://connect.microsoft.com/VisualStudio/feedback/details/761829 
             std::future<void> f = std::async(std::launch::async, []{ boost::this_thread::sleep_for(boost::chrono::hours(24)); });
 #endif
             std_future_status s = f.wait_for(std::chrono::seconds(SLEEP));
